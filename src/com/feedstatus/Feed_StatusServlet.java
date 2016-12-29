@@ -22,7 +22,7 @@ public class Feed_StatusServlet extends HttpServlet {
 		boolean isValidPassword = true;
 
 		PrintWriter out = resp.getWriter();
-
+		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		Query q = new Query("LoginDetails");
 		PreparedQuery pq = datastore.prepare(q);
@@ -34,8 +34,8 @@ public class Feed_StatusServlet extends HttpServlet {
 		for (Entity d : pq.asIterable()) {
 			foundName = d.getProperty("email").toString();
 			foundPassword = d.getProperty("password").toString();
-			System.out.println("found user::" + foundName);
-			System.out.println("found pass:" + foundPassword);
+//			System.out.println("found user::" + foundName);
+//			System.out.println("found pass:" + foundPassword);
 
 			if (loginName.equals(foundName)) {
 				isValidEmail = true;
@@ -52,9 +52,12 @@ public class Feed_StatusServlet extends HttpServlet {
 		}
 
 		if (isValidEmail == false) {
-			out.println("Your entered Email id is wrong");
+			req.getRequestDispatcher("index.html").include(req, resp);
+			out.println("<h2 style = color:#B3008E;>Your entered Email id is wrong</h2>");
 		} else if (isValidPassword == false) {
-			out.println("Your entered Password is wrong");
+			req.getRequestDispatcher("index.html").include(req, resp);
+
+			out.println("<h2 style = color:#B3008E;>Your entered Password is wrong</h2>");
 		}
 	}
 

@@ -21,9 +21,9 @@ public class Profile extends HttpServlet {
           
        
         }  
-        else{  
-            out.print("Please login first");  
+        else{    
             request.getRequestDispatcher("index.html").include(request, response);  
+			out.println("<h2 style = color:#B3008E;>Please login first </h2>");
         }  
         out.close();  
     }  
